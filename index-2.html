@@ -1,0 +1,432 @@
+<html>
+
+<head>
+    <title>My first Babylon.js app</title>
+    <script src="https://preview.babylonjs.com/babylon.js"></script>
+    <script src="https://preview.babylonjs.com/gui/babylon.gui.min.js"></script>
+    <!-- <script src=" hand.min.js"></script> -->
+    <style>
+
+        html,
+        body,
+        canvas {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+
+            background-image: linear-gradient(to bottom, #000000, #260b18, #410b2f, #59094e, #6b0f75);
+           
+        }
+        canvas{
+            border:none !important;
+            outline:none !important;
+        
+        }
+        body{
+             
+             background-image: linear-gradient(to bottom, #000000, #1c0711, #2c0c20, #3a0d33, #45114a);
+        }
+        .logo-block{
+                display: inline-block;
+                float:left;
+                position: relative;
+                top:-10px;
+                left:20px;
+    /* background-image: linear-gradient(to bottom, #000000, #1c0711, #2c0c20, #3a0d33, #45114a); */
+        }
+        .logo-block img{
+            width:62px;
+            filter: brightness(0) invert(1);
+        }
+
+        #nav {
+  width: 100%;
+  margin: 20px 0; 
+  /* background-image: linear-gradient(to bottom, #000000, #1c0711, #2c0c20, #3a0d33, #45114a); */
+  background-image: linear-gradient(to bottom, #000000, #0c0004, #15000a, #1a0010, #1e0116, #23041d, #280724, #2d082d, #360939, #400b46, #490d53, #510f61);
+  text-align:center;
+  display: none;
+ -webkit-transition: display 5s ease-in-out;
+  -moz-transition: display 5s ease-in-out;
+  -o-transition: display 5s ease-in-out;
+  transition: display 5s ease-in-out;
+  }
+nav ul {
+  list-style: none;
+  overflow: hidden;padding:0;
+  display:inline-block;
+  width:65%;
+  text-align:center;
+ }
+nav ul li {
+  float: left;
+  width: 15%; }
+nav ul li a {
+  text-align: center;
+  padding: 10px 0;
+  display: block;
+  width: 100%;
+  font-family: sans-serif;
+    font-weight: 600;
+/* IE6-9 */
+  }
+nav ul li a,
+nav ul li a:focus,
+nav ul li a:visited,
+nav ul li a:hover,
+nav ul li a:active {
+  color: #fff;
+  text-decoration: none; }
+nav ul li a:hover,
+nav ul li a:active, nav ul li a.active{
+    border-bottom:2px solid #fff;
+ /* IE6-9 */
+  }
+  .grid-box{
+      background: #000;
+      border:10px solid green;
+      box-shadow:
+    inset 0 0 50px #fff,
+    inset 20px 0 80px #f0f,
+    inset -20px 0 80px #0ff,
+    inset 20px 0 300px #f0f,
+    inset -20px 0 300px #0ff,
+    0 0 50px #fff,
+    -10px 0 80px #f0f,
+    10px 0 80px #0ff;
+  }
+
+    </style>
+</head>
+
+<body id="body">
+<nav id="nav">
+<div class="logo-block"><img src="images/logo.png"></div>
+  <ul>
+    <li>
+        <a class="active" href="#">Home</a>
+    </li>
+    <li>
+        <a href="#">Games</a>
+    </li>
+    <li>
+        <a href="#">Apps</a>
+    </li>
+    <li>
+        <a href="#">Store</a>
+    </li>
+    <li>
+        <a href="#">Social</a>
+    </li>
+    <li>
+        <a href="#">System</a>
+    </li>
+  </ul>
+  </nav>
+    <canvas id="canvas"></canvas>
+    <script>
+        if (BABYLON.Engine.isSupported()) {
+            console.log('Called tfyguh');
+            var canvas = document.getElementById("canvas");
+            
+            var engine = new BABYLON.Engine(canvas, true);
+            var scene = new BABYLON.Scene(engine);
+            // var camera = new BABYLON.ArcRotateCamera("Camera", 0, Math.PI / 2, 13, BABYLON.Vector3.Zero(), scene);
+                setTimeout(() => {
+                   document.getElementById("nav").setAttribute("style", "display: block; ");
+                    
+                }, 1000);
+            var camera = new BABYLON.UniversalCamera("UniversalCamera", new BABYLON.Vector3(0, 0, 10), scene);
+            camera.setTarget(BABYLON.Vector3.Zero());
+            camera.attachControl(canvas, true);
+            // console.log(scene);
+            var light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(0, -1, 0), scene);
+            var noOfColumns = 3;
+            var noOfRows = 9;
+            var colorPanel = [
+                new BABYLON.Color3(0.7, 0.9, 0.9).toHexString(), "#510f61", "#1a607b", "#31237d", new BABYLON.Color3(0.8,
+                    0.4, 0.2).toHexString(), new BABYLON.Color3(0.5, 0.2, 0.2).toHexString(), new BABYLON.Color3(
+                        0.8, 0.6, 0.2).toHexString()
+            ]
+            // console.log(colorPanel, "cp");
+            var imagesList = [
+                "https://cdn.supercell.com/supercell.com/190807125114/supercell.com/files/games_thumbnail_brawlstars.jpg",
+                "https://cdn.supercell.com/supercell.com/190807125114/supercell.com/files/games_thumbnail_clashroyale.jpg",
+                "https://cdn.supercell.com/supercell.com/190807125114/supercell.com/files/games_thumbnail_boombeach.jpg",
+                "https://cdn.supercell.com/supercell.com/190807125114/supercell.com/files/games_thumbnail_clashofclans.jpg",
+                "https://cdn.supercell.com/supercell.com/190807125114/supercell.com/files/games_thumbnail_hayday.jpg",
+                "https://cdn.supercell.com/supercell.com/190807125114/supercell.com/files/games_thumbnail_clashroyale.jpg"
+            ];
+
+
+
+
+
+            var advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
+            
+            var sv = new BABYLON.GUI.ScrollViewer();
+            sv.width = 1;
+            sv.height = 1;
+            sv.background = "black";
+            sv.barSize = 0;
+            // sv.borderColor = '5px solid red'
+            advancedTexture.addControl(sv);
+            
+            var panel = new BABYLON.GUI.StackPanel(); 
+            panel.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;    
+            sv.addControl(panel);   
+            var gd = new BABYLON.GUI.Grid();
+            var initRowCount = 0;
+            var initColCount = 0;
+            var panelTopValue=0;
+            gd.width = (window.innerWidth * (noOfColumns / 3)) + "px";
+            gd.height = (window.innerHeight * (noOfRows / 3))+'px';
+            // console.log(gd);
+            // gd.height = "1600px";
+            for (var idx = 1; idx <= noOfColumns; idx++) {
+                gd.addColumnDefinition(1 / noOfColumns);
+            }
+            for (var idx = 1; idx <= noOfRows; idx++) {
+                gd.addRowDefinition(0.5);
+            }
+            
+            panel.addControl(gd);
+            var style = advancedTexture.createStyle();
+
+            for (var rowIdx = 0; rowIdx < noOfRows; rowIdx++) {
+                for (var colIdx = 0; colIdx < noOfColumns; colIdx++) {
+                    var im1 = new BABYLON.GUI.Button.CreateImageOnlyButton("im" + rowIdx + ':' + colIdx,
+                        imagesList[Math.floor(Math.random() * imagesList.length)]
+                    );
+                    var colorPicked = colorPanel[Math.floor(Math.random() * colorPanel.length)];
+                    im1.background = colorPicked;
+                    if (colIdx == 0) {
+                        im1.paddingLeft = '0%';
+                    } else {
+                        im1.paddingLeft = '8px';
+                    }
+                    if (colIdx == 0 && rowIdx == 0) {
+                        im1.paddingTop = '10%';
+                    } else {
+                        im1.paddingTop = '8px';
+                    }
+
+                    im1.isPointerBlocker = true
+                    im1.shadowBlur = 20;
+                    // im1.shadowOffsetX = -200;
+                    // im1.shadowOffsetY = 20;
+                    im1.shadowColor = "black";
+
+                    im1.outlineColor = colorPicked;
+                    im1.outlineWidth = 50;
+                    im1.focusedBackground = '#FFF';
+                    im1.alpha = 0;
+                    im1.width = '95%';
+                    im1.height = '95%'
+                    im1.zIndex = 20;
+
+
+                    im1.onPointerDownObservable.add(function () {
+                        // textblock.text = "Down!";
+                        // console.log(im1)
+                    });
+                    im1.onPointerUpObservable.add(function () {
+                        // textblock.text = "Up!";
+                        // console.log(im1)
+                    });
+                    im1.onPointerEnterObservable.add(function () {
+                        // textblock.text = "Enter!";
+                        // console.log(im1)
+                    });
+                    im1.onPointerOutObservable.add(function () {
+                        // textblock.text = "Out!";
+                        // console.log(im1)
+                    });
+                    if (colIdx == noOfColumns - 1) {
+                        im1.paddingRight = '8px';
+                    }
+                    if (rowIdx == noOfRows - 1) {
+                        im1.paddingBottom = '8px';
+                    }
+                    im1.getClassName="grid-box";
+
+                    // var im1Bg = new BABYLON.GUI.Image("im" + rowIdx + ':' + colIdx,
+                    //     imagesList[Math.floor(Math.random() * imagesList.length)]
+                    // );
+                    // im1Bg.background = colorPicked;
+
+                    var im1Bg = new BABYLON.GUI.Rectangle();
+                    // im1Bg.uniqueId = 'im1Bg'+ rowIdx+ ':' + colIdx;
+                    // im1Bg.uniqueId = 'im1Bg'+ rowIdx+ ':' + colIdx;
+                    // im1Bg.width = 0.2;
+                    // im1Bg.height = "40px";
+                    // im1Bg.cornerRadius = 20;
+                    im1Bg.color = colorPicked;
+                    im1Bg.thickness = 4;
+                    im1Bg.paddingLeft = '8px';
+                    im1Bg.paddingRight = '8px';
+                    im1Bg.paddingBottom = '8px';
+                    im1Bg.paddingTop = '8px';
+                    im1Bg.background = colorPicked;
+                    im1Bg.zIndex = -40;
+                    im1Bg.getClassName="grid-box";
+
+                    // var img2 = new BABYLON.GUI.Rectangle();
+                    // img2.thickness = 2;
+                    // img2.paddingLeft = '8px';
+                    // img2.paddingRight = '8px';
+                    // img2.paddingBottom = '8px';
+                    // img2.paddingTop = '8px';
+                    // img2.color = 'blue';
+                    // img2.shadowBlur = 20;
+                    // img2.shadowColor = colorPicked
+                    // img2.zIndex = 1;
+                    // gd.addControl(img2,rowIdx, colIdx);
+                    gd.addControl(im1Bg, rowIdx, colIdx);
+                    gd.addControl(im1, rowIdx, colIdx);
+
+
+                }
+            }
+            //End code for image in scrollviewer
+
+            var renderLoop = function () {
+                // console.log('scene render');
+                scene.render();
+            };
+            scene.afterRender = function () {
+  
+                
+                let isAlphaAcheived = gd.getChildByName('im0:0').alpha >= 1;
+                let isPaddingAcheived = (Number(gd.getChildByName('im0:0').paddingLeft.replace('%', '')) >= 10);
+                // console.log(gd.getChildByName('im1Bg'+initRowCount+':''+initColCount));
+                // console.log(gd.cells[initRowCount+':'+initColCount]);
+               
+                gd.cells[initRowCount+':'+initColCount].background = 'red';
+                gd.cells[initRowCount+':'+initColCount].thickness = '5';
+                gd.cells[initRowCount+':'+initColCount].width = 0.5;
+                gd.cells[initRowCount+':'+initColCount].height = 0.5;
+                style.border="40px"
+
+                gd.cells[initRowCount+':'+initColCount].style = style;
+                scene.beginAnimation(gd.cells[initRowCount+':'+initColCount], 0, 40, true);
+       
+                // console.log(gd.getChildByName(initRowCount+':'+initColCount))
+                // console.log(gd.background);
+                // gd.getChildByName('im1Bg'+initRowCount+':'+initColCount).thickness = '5';
+                // gd.getChildByName('im1Bg'+initRowCount+':'+initColCount).background = '#04d5fd'
+                // gd.getChildByName('im0:1').thickness = '5';
+                // gd.getChildByName('im0:1').color = 'red';
+                // gd.getChildByName('im0:1').outlineColor = 'pink';
+                // console.log(1);
+
+                
+               
+
+                if (!isPaddingAcheived) {
+                    for (var rowIdx = 0; rowIdx < noOfRows; rowIdx++) {
+                        var element = gd.getChildByName('im' + rowIdx + ':0');
+                        // console.log(element);
+                        element.paddingLeft = Number(element.paddingLeft.replace('%', '')) + 0.1 + '%';
+                    }
+                } else if (!isAlphaAcheived) {
+                    for (var rowIdx = 0; rowIdx < noOfRows; rowIdx++) {
+                        for (var colIdx = 0; colIdx < noOfColumns; colIdx++) {
+                            var element = gd.getChildByName('im' + rowIdx + ':' + colIdx);
+                            element.alpha += 0.005;
+                        }
+                    }
+                }
+            }
+        };
+        engine.runRenderLoop(renderLoop);
+
+        // scene.beginAnimation(sfdsfs, 0, 40, true)
+        // var alpha = 0;
+        // knot.scaling.y = 1.5;
+
+        scene.beforeRender = function () {
+            // knot.rotation.x = alpha;
+            // alpha += 0.03;
+            // console.log('scene before render');
+        };
+        var inputMap = {};
+            scene.actionManager = new BABYLON.ActionManager(scene);
+            scene.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnKeyDownTrigger, (evt) => {
+                inputMap[evt.sourceEvent.key] = evt.sourceEvent.type == "keydown";
+                // console.log(gd.cells[initRowCount+':'+initColCount]._currentMeasure.top, "ppppp")
+                gd.cells[initRowCount+':'+initColCount].thickness = '0';
+                gd.cells[initRowCount+':'+initColCount].background = '';
+                // gd.cells[initRowCount+':'+initColCount].top=gd.cells[initRowCount+':'+initColCount].top-300;
+                // console.log(gd.cells[initRowCount+':'+initColCount].top, "ppppp")
+
+                if(inputMap["w"] || inputMap["ArrowUp"]) {
+                    console.log("pressed w or up arrow");
+                    if(initRowCount != 0){
+                        initRowCount--;
+                        panelTopValue=panelTopValue-300;
+                        panel.top=panelTopValue;
+                    }else {
+                        initRowCount = noOfRows -1;
+                        panelTopValue=panelTopValue-300;
+                        panel.top=panelTopValue;
+                    }
+                    inputMap = {};
+                }
+                if (inputMap["a"] || inputMap["ArrowLeft"]) {
+                    console.log('Pressed left arrow or a');
+                    if(initColCount != 0 ) {
+                        initColCount--;
+                    }else {
+                        if((initRowCount != 0)&&((initRowCount+1)<= noOfRows)) {
+                            initRowCount = initRowCount - 1;
+                            initColCount = noOfColumns - 1;
+                        console.log(initRowCount, initColCount, "Uma");
+                        }else {
+                            initRowCount = noOfRows - 1;
+                            initColCount = noOfColumns - 1;
+                        }
+                    }
+                    inputMap = {};
+                }
+                if (inputMap["s"] || inputMap["ArrowDown"]) {
+                    console.log('Pressed Down arrow or s');
+                    if((initRowCount != 0 || initRowCount == 0) && (initRowCount+1) < noOfRows){
+                        initRowCount++;
+                        if(initRowCount > 2 && initRowCount !=0){
+                        panelTopValue=panelTopValue-300;
+                        panel.top=panelTopValue;
+                        }
+                        
+                       
+                    }else {
+                        initRowCount = 0;
+                    }
+                    inputMap = {};
+                }
+                if (inputMap["d"] || inputMap["ArrowRight"]) {
+                    console.log('Pressed Right arrow or d')
+                    if((initColCount != 0 || initColCount == 0) && ((initColCount+1) < noOfColumns)) {
+                        initColCount++
+                    }else {
+                        initColCount = 0;
+                        if((initRowCount+1) >= noOfRows) {
+                            initRowCount = 0;
+                        }else {
+                            initRowCount++;
+                        }
+                    }                    
+                    inputMap = {};
+                }
+
+         
+
+                console.log(initRowCount, initColCount, "rows * columns");
+            }))
+
+
+    </script>
+</body>
+
+</html>
